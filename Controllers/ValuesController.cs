@@ -20,7 +20,7 @@ namespace ApiExample.Controllers
             var result = new
             {
                
-                data = web.Doctors.Select(x => new { x.Title, x.Mobile, x.Gender, x.Fee })
+                data = web.Doctors.Select(x => new { x.Title, x.Mobile, x.Gender, x.Fee,x.DoctorVisitDay })
             };
             return Request.CreateResponse(HttpStatusCode.OK,result);
         }

@@ -1,0 +1,1209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PoliclinicPatnaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="_FacilityInvoice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TransactionId" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PatientId" Type="int" Nullable="false" />
+          <Property Name="BranchId" Type="int" Nullable="false" />
+          <Property Name="AppointmentDate" Type="date" Nullable="false" />
+          <Property Name="PaymentMethod" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="int" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CancelReason" Type="nvarchar(max)" />
+          <Property Name="CanceledBy" Type="int" />
+          <Property Name="CancelDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="_FacilityInvoiceDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InvoiceId" Type="int" Nullable="false" />
+          <Property Name="FacilityId" Type="int" Nullable="false" />
+          <Property Name="ServiceId" Type="int" Nullable="false" />
+          <Property Name="Fee" Type="float" Nullable="false" />
+          <Property Name="ServiceCharge" Type="float" Nullable="false" />
+          <Property Name="Tax" Type="float" Nullable="false" />
+          <Property Name="TaxPercent" Type="float" />
+          <Property Name="Discount" Type="float" Nullable="false" />
+          <Property Name="DiscountType" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="AdminUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BranchId" Type="int" Nullable="false" />
+          <Property Name="LoginId" Type="nvarchar(max)" />
+          <Property Name="Password" Type="nvarchar(max)" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="Role" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PoliclinicPatna.dbo.BillReport' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="BillReport">
+          <Key>
+            <PropertyRef Name="BillNo" />
+          </Key>
+          <Property Name="BillNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RegistrationId" Type="int" />
+          <Property Name="CreatedDate" Type="datetime" />
+          <Property Name="registrationFee" Type="int" />
+          <Property Name="c1" Type="int" />
+          <Property Name="c2" Type="int" />
+          <Property Name="c3" Type="int" />
+          <Property Name="c4" Type="int" />
+          <Property Name="c5" Type="int" />
+          <Property Name="c6" Type="int" />
+          <Property Name="c7" Type="int" />
+          <Property Name="c8" Type="int" />
+          <Property Name="c9" Type="int" />
+          <Property Name="c10" Type="int" />
+          <Property Name="CreatedBy" Type="varchar(max)" />
+          <Property Name="AddGroup" Type="int" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="c11" Type="int" />
+        </EntityType>
+        <EntityType Name="BranchDoctor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DoctorId" Type="int" Nullable="false" />
+          <Property Name="BranchId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Degree">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PoliclinicPatna.dbo.DiagnosticCancelationDetail' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="DiagnosticCancelationDetail">
+          <Key>
+            <PropertyRef Name="SrNo" />
+          </Key>
+          <Property Name="SrNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RegistrationID" Type="int" />
+          <Property Name="CancelReason" Type="nvarchar(max)" />
+          <Property Name="CancelBy" Type="nvarchar(max)" />
+          <Property Name="CancelDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Doctor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Fee" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="ImageId" Type="int" />
+          <Property Name="Gender" Type="nvarchar(max)" />
+          <Property Name="DOB" Type="date" />
+          <Property Name="DOJ" Type="date" />
+          <Property Name="Landline" Type="nvarchar(max)" />
+          <Property Name="Mobile" Type="nvarchar(max)" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="DoctorVisitDay" Type="nvarchar" MaxLength="500" />
+          <Property Name="DoctorTiming" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="DoctorDegree">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DoctorId" Type="int" Nullable="false" />
+          <Property Name="DegreeId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DoctorSpecialization">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DoctorId" Type="int" Nullable="false" />
+          <Property Name="SpecializationId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar(max)" />
+          <Property Name="createdBy" Type="varchar" MaxLength="10" />
+          <Property Name="CreatedDate" Type="date" />
+        </EntityType>
+        <EntityType Name="Facility">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="FileId" Type="int" />
+          <Property Name="UIVisible" Type="bit" Nullable="false" />
+          <Property Name="MutlipleVisitRequired" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FacilityItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FacilityId" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="FileId" Type="int" />
+          <Property Name="Amount" Type="float" Nullable="false" />
+          <Property Name="OfferAmount" Type="float" />
+          <Property Name="VisitsRequired" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Registration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RegistrationDate" Type="datetime" Nullable="false" />
+          <Property Name="RegNo" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="50" />
+          <Property Name="Age" Type="int" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="City" Type="nvarchar(max)" />
+          <Property Name="Mobile" Type="nvarchar(max)" />
+          <Property Name="PatientTypeId" Type="int" Nullable="false" />
+          <Property Name="BranchId" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsSingleBilling" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="CanceledBy" Type="nvarchar(max)" />
+          <Property Name="CancelDate" Type="datetime" />
+          <Property Name="CancelReason" Type="nvarchar(max)" />
+          <Property Name="RegCount" Type="int" Nullable="false" />
+          <Property Name="RecommendedBy" Type="int" />
+          <Property Name="RName" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="RegistrationDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="TransactionId" Type="nvarchar(max)" />
+          <Property Name="RegistrationFee" Type="float" Nullable="false" />
+          <Property Name="ServiceCharges" Type="float" Nullable="false" />
+          <Property Name="Tax" Type="float" Nullable="false" />
+          <Property Name="TaxPercent" Type="float" />
+          <Property Name="DiscountAmount" Type="float" Nullable="false" />
+          <Property Name="DiscountType" Type="nvarchar(max)" />
+          <Property Name="PaymentMethod" Type="int" Nullable="false" />
+          <Property Name="PaymentTransactionId" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="RegistrationDoctor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DoctorId" Type="int" Nullable="false" />
+          <Property Name="RegistrationId" Type="int" Nullable="false" />
+          <Property Name="AppointmentDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsPrimary" Type="bit" Nullable="false" />
+          <Property Name="Specialization" Type="int" />
+        </EntityType>
+        <EntityType Name="RegistrationFacility">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RegistrationId" Type="int" Nullable="false" />
+          <Property Name="TransactionId" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="AppointmentDate" Type="date" Nullable="false" />
+          <Property Name="PaymentMethod" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="CancelReason" Type="nvarchar(max)" />
+          <Property Name="CanceledBy" Type="nvarchar(max)" />
+          <Property Name="CancelDate" Type="datetime" />
+          <Property Name="IsMultipleVisit" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_BranchDoctor_Doctor">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="BranchDoctor" Type="Self.BranchDoctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BranchDoctor">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DoctorDegree_Degree">
+          <End Role="Degree" Type="Self.Degree" Multiplicity="1" />
+          <End Role="DoctorDegree" Type="Self.DoctorDegree" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Degree">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DoctorDegree">
+              <PropertyRef Name="DegreeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DoctorDegree_Doctor">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="DoctorDegree" Type="Self.DoctorDegree" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DoctorDegree">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DoctorSpecialization_Doctor">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="DoctorSpecialization" Type="Self.DoctorSpecialization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DoctorSpecialization">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FacilityInvoiceDetail_Facility">
+          <End Role="Facility" Type="Self.Facility" Multiplicity="1" />
+          <End Role="_FacilityInvoiceDetail" Type="Self._FacilityInvoiceDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facility">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="_FacilityInvoiceDetail">
+              <PropertyRef Name="FacilityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FacilityInvoiceDetail_FacilityInvoice">
+          <End Role="_FacilityInvoice" Type="Self._FacilityInvoice" Multiplicity="1" />
+          <End Role="_FacilityInvoiceDetail" Type="Self._FacilityInvoiceDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="_FacilityInvoice">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="_FacilityInvoiceDetail">
+              <PropertyRef Name="InvoiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FacilityInvoiceDetail_Service">
+          <End Role="FacilityItem" Type="Self.FacilityItem" Multiplicity="1" />
+          <End Role="_FacilityInvoiceDetail" Type="Self._FacilityInvoiceDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FacilityItem">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="_FacilityInvoiceDetail">
+              <PropertyRef Name="ServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RegistrationDetail_Registration">
+          <End Role="Registration" Type="Self.Registration" Multiplicity="1" />
+          <End Role="RegistrationDetail" Type="Self.RegistrationDetail" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Registration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RegistrationDetail">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RegistrationDoctor_Doctor">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="RegistrationDoctor" Type="Self.RegistrationDoctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RegistrationDoctor">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RegistrationFacility_Registration">
+          <End Role="Registration" Type="Self.Registration" Multiplicity="1" />
+          <End Role="RegistrationFacility" Type="Self.RegistrationFacility" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RegistrationFacility">
+              <PropertyRef Name="RegistrationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_Facility">
+          <End Role="Facility" Type="Self.Facility" Multiplicity="1" />
+          <End Role="FacilityItem" Type="Self.FacilityItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facility">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FacilityItem">
+              <PropertyRef Name="FacilityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PoliclinicPatnaModelStoreContainer">
+          <EntitySet Name="_FacilityInvoice" EntityType="Self._FacilityInvoice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="_FacilityInvoiceDetail" EntityType="Self._FacilityInvoiceDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AdminUsers" EntityType="Self.AdminUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BranchDoctor" EntityType="Self.BranchDoctor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Degree" EntityType="Self.Degree" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Doctor" EntityType="Self.Doctor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DoctorDegree" EntityType="Self.DoctorDegree" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DoctorSpecialization" EntityType="Self.DoctorSpecialization" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="employee" EntityType="Self.employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Facility" EntityType="Self.Facility" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FacilityItem" EntityType="Self.FacilityItem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Registration" EntityType="Self.Registration" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RegistrationDetail" EntityType="Self.RegistrationDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RegistrationDoctor" EntityType="Self.RegistrationDoctor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RegistrationFacility" EntityType="Self.RegistrationFacility" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BillReport" EntityType="Self.BillReport" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[BillReport].[BillNo] AS [BillNo], 
+[BillReport].[RegistrationId] AS [RegistrationId], 
+[BillReport].[CreatedDate] AS [CreatedDate], 
+[BillReport].[registrationFee] AS [registrationFee], 
+[BillReport].[c1] AS [c1], 
+[BillReport].[c2] AS [c2], 
+[BillReport].[c3] AS [c3], 
+[BillReport].[c4] AS [c4], 
+[BillReport].[c5] AS [c5], 
+[BillReport].[c6] AS [c6], 
+[BillReport].[c7] AS [c7], 
+[BillReport].[c8] AS [c8], 
+[BillReport].[c9] AS [c9], 
+[BillReport].[c10] AS [c10], 
+[BillReport].[CreatedBy] AS [CreatedBy], 
+[BillReport].[AddGroup] AS [AddGroup], 
+[BillReport].[IsActive] AS [IsActive], 
+[BillReport].[c11] AS [c11]
+FROM [dbo].[BillReport] AS [BillReport]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="DiagnosticCancelationDetail" EntityType="Self.DiagnosticCancelationDetail" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[DiagnosticCancelationDetail].[SrNo] AS [SrNo], 
+[DiagnosticCancelationDetail].[RegistrationID] AS [RegistrationID], 
+[DiagnosticCancelationDetail].[CancelReason] AS [CancelReason], 
+[DiagnosticCancelationDetail].[CancelBy] AS [CancelBy], 
+[DiagnosticCancelationDetail].[CancelDate] AS [CancelDate]
+FROM [dbo].[DiagnosticCancelationDetail] AS [DiagnosticCancelationDetail]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_BranchDoctor_Doctor" Association="Self.FK_BranchDoctor_Doctor">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="BranchDoctor" EntitySet="BranchDoctor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DoctorDegree_Degree" Association="Self.FK_DoctorDegree_Degree">
+            <End Role="Degree" EntitySet="Degree" />
+            <End Role="DoctorDegree" EntitySet="DoctorDegree" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DoctorDegree_Doctor" Association="Self.FK_DoctorDegree_Doctor">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="DoctorDegree" EntitySet="DoctorDegree" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DoctorSpecialization_Doctor" Association="Self.FK_DoctorSpecialization_Doctor">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="DoctorSpecialization" EntitySet="DoctorSpecialization" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FacilityInvoiceDetail_Facility" Association="Self.FK_FacilityInvoiceDetail_Facility">
+            <End Role="Facility" EntitySet="Facility" />
+            <End Role="_FacilityInvoiceDetail" EntitySet="_FacilityInvoiceDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FacilityInvoiceDetail_FacilityInvoice" Association="Self.FK_FacilityInvoiceDetail_FacilityInvoice">
+            <End Role="_FacilityInvoice" EntitySet="_FacilityInvoice" />
+            <End Role="_FacilityInvoiceDetail" EntitySet="_FacilityInvoiceDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FacilityInvoiceDetail_Service" Association="Self.FK_FacilityInvoiceDetail_Service">
+            <End Role="FacilityItem" EntitySet="FacilityItem" />
+            <End Role="_FacilityInvoiceDetail" EntitySet="_FacilityInvoiceDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RegistrationDetail_Registration" Association="Self.FK_RegistrationDetail_Registration">
+            <End Role="Registration" EntitySet="Registration" />
+            <End Role="RegistrationDetail" EntitySet="RegistrationDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RegistrationDoctor_Doctor" Association="Self.FK_RegistrationDoctor_Doctor">
+            <End Role="Doctor" EntitySet="Doctor" />
+            <End Role="RegistrationDoctor" EntitySet="RegistrationDoctor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RegistrationFacility_Registration" Association="Self.FK_RegistrationFacility_Registration">
+            <End Role="Registration" EntitySet="Registration" />
+            <End Role="RegistrationFacility" EntitySet="RegistrationFacility" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_Facility" Association="Self.FK_Service_Facility">
+            <End Role="Facility" EntitySet="Facility" />
+            <End Role="FacilityItem" EntitySet="FacilityItem" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PoliclinicPatnaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="C_FacilityInvoice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TransactionId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PatientId" Type="Int32" Nullable="false" />
+          <Property Name="BranchId" Type="Int32" Nullable="false" />
+          <Property Name="AppointmentDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PaymentMethod" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="Int32" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CancelReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CanceledBy" Type="Int32" />
+          <Property Name="CancelDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="C_FacilityInvoiceDetail" Relationship="Self.FK_FacilityInvoiceDetail_FacilityInvoice" FromRole="C_FacilityInvoice" ToRole="C_FacilityInvoiceDetail" />
+        </EntityType>
+        <EntityType Name="C_FacilityInvoiceDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InvoiceId" Type="Int32" Nullable="false" />
+          <Property Name="FacilityId" Type="Int32" Nullable="false" />
+          <Property Name="ServiceId" Type="Int32" Nullable="false" />
+          <Property Name="Fee" Type="Double" Nullable="false" />
+          <Property Name="ServiceCharge" Type="Double" Nullable="false" />
+          <Property Name="Tax" Type="Double" Nullable="false" />
+          <Property Name="TaxPercent" Type="Double" />
+          <Property Name="Discount" Type="Double" Nullable="false" />
+          <Property Name="DiscountType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="C_FacilityInvoice" Relationship="Self.FK_FacilityInvoiceDetail_FacilityInvoice" FromRole="C_FacilityInvoiceDetail" ToRole="C_FacilityInvoice" />
+          <NavigationProperty Name="Facility" Relationship="Self.FK_FacilityInvoiceDetail_Facility" FromRole="C_FacilityInvoiceDetail" ToRole="Facility" />
+          <NavigationProperty Name="FacilityItem" Relationship="Self.FK_FacilityInvoiceDetail_Service" FromRole="C_FacilityInvoiceDetail" ToRole="FacilityItem" />
+        </EntityType>
+        <EntityType Name="AdminUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BranchId" Type="Int32" Nullable="false" />
+          <Property Name="LoginId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Role" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BranchDoctor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DoctorId" Type="Int32" Nullable="false" />
+          <Property Name="BranchId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Doctor" Relationship="Self.FK_BranchDoctor_Doctor" FromRole="BranchDoctor" ToRole="Doctor" />
+        </EntityType>
+        <EntityType Name="Degree">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="DoctorDegrees" Relationship="Self.FK_DoctorDegree_Degree" FromRole="Degree" ToRole="DoctorDegree" />
+        </EntityType>
+        <EntityType Name="Doctor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Fee" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="ImageId" Type="Int32" />
+          <Property Name="Gender" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DOB" Type="DateTime" Precision="0" />
+          <Property Name="DOJ" Type="DateTime" Precision="0" />
+          <Property Name="Landline" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DoctorVisitDay" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="DoctorTiming" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="BranchDoctors" Relationship="Self.FK_BranchDoctor_Doctor" FromRole="Doctor" ToRole="BranchDoctor" />
+          <NavigationProperty Name="DoctorDegrees" Relationship="Self.FK_DoctorDegree_Doctor" FromRole="Doctor" ToRole="DoctorDegree" />
+          <NavigationProperty Name="DoctorSpecializations" Relationship="Self.FK_DoctorSpecialization_Doctor" FromRole="Doctor" ToRole="DoctorSpecialization" />
+          <NavigationProperty Name="RegistrationDoctors" Relationship="Self.FK_RegistrationDoctor_Doctor" FromRole="Doctor" ToRole="RegistrationDoctor" />
+        </EntityType>
+        <EntityType Name="DoctorDegree">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DoctorId" Type="Int32" Nullable="false" />
+          <Property Name="DegreeId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Degree" Relationship="Self.FK_DoctorDegree_Degree" FromRole="DoctorDegree" ToRole="Degree" />
+          <NavigationProperty Name="Doctor" Relationship="Self.FK_DoctorDegree_Doctor" FromRole="DoctorDegree" ToRole="Doctor" />
+        </EntityType>
+        <EntityType Name="DoctorSpecialization">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DoctorId" Type="Int32" Nullable="false" />
+          <Property Name="SpecializationId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Doctor" Relationship="Self.FK_DoctorSpecialization_Doctor" FromRole="DoctorSpecialization" ToRole="Doctor" />
+        </EntityType>
+        <EntityType Name="employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="createdBy" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+        </EntityType>
+        <EntityType Name="Facility">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="FileId" Type="Int32" />
+          <Property Name="UIVisible" Type="Boolean" Nullable="false" />
+          <Property Name="MutlipleVisitRequired" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="C_FacilityInvoiceDetail" Relationship="Self.FK_FacilityInvoiceDetail_Facility" FromRole="Facility" ToRole="C_FacilityInvoiceDetail" />
+          <NavigationProperty Name="FacilityItems" Relationship="Self.FK_Service_Facility" FromRole="Facility" ToRole="FacilityItem" />
+        </EntityType>
+        <EntityType Name="FacilityItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FacilityId" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="FileId" Type="Int32" />
+          <Property Name="Amount" Type="Double" Nullable="false" />
+          <Property Name="OfferAmount" Type="Double" />
+          <Property Name="VisitsRequired" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="C_FacilityInvoiceDetail" Relationship="Self.FK_FacilityInvoiceDetail_Service" FromRole="FacilityItem" ToRole="C_FacilityInvoiceDetail" />
+          <NavigationProperty Name="Facility" Relationship="Self.FK_Service_Facility" FromRole="FacilityItem" ToRole="Facility" />
+        </EntityType>
+        <EntityType Name="Registration">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RegistrationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="RegNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Age" Type="Int32" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Mobile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PatientTypeId" Type="Int32" Nullable="false" />
+          <Property Name="BranchId" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsSingleBilling" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CanceledBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CancelDate" Type="DateTime" Precision="3" />
+          <Property Name="CancelReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RegCount" Type="Int32" Nullable="false" />
+          <Property Name="RecommendedBy" Type="Int32" />
+          <Property Name="RName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="RegistrationDetail" Relationship="Self.FK_RegistrationDetail_Registration" FromRole="Registration" ToRole="RegistrationDetail" />
+          <NavigationProperty Name="RegistrationFacilities" Relationship="Self.FK_RegistrationFacility_Registration" FromRole="Registration" ToRole="RegistrationFacility" />
+        </EntityType>
+        <EntityType Name="RegistrationDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="TransactionId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RegistrationFee" Type="Double" Nullable="false" />
+          <Property Name="ServiceCharges" Type="Double" Nullable="false" />
+          <Property Name="Tax" Type="Double" Nullable="false" />
+          <Property Name="TaxPercent" Type="Double" />
+          <Property Name="DiscountAmount" Type="Double" Nullable="false" />
+          <Property Name="DiscountType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PaymentMethod" Type="Int32" Nullable="false" />
+          <Property Name="PaymentTransactionId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Registration" Relationship="Self.FK_RegistrationDetail_Registration" FromRole="RegistrationDetail" ToRole="Registration" />
+        </EntityType>
+        <EntityType Name="RegistrationDoctor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DoctorId" Type="Int32" Nullable="false" />
+          <Property Name="RegistrationId" Type="Int32" Nullable="false" />
+          <Property Name="AppointmentDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsPrimary" Type="Boolean" Nullable="false" />
+          <Property Name="Specialization" Type="Int32" />
+          <NavigationProperty Name="Doctor" Relationship="Self.FK_RegistrationDoctor_Doctor" FromRole="RegistrationDoctor" ToRole="Doctor" />
+        </EntityType>
+        <EntityType Name="RegistrationFacility">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RegistrationId" Type="Int32" Nullable="false" />
+          <Property Name="TransactionId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AppointmentDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PaymentMethod" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="CancelReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CanceledBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CancelDate" Type="DateTime" Precision="3" />
+          <Property Name="IsMultipleVisit" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Registration" Relationship="Self.FK_RegistrationFacility_Registration" FromRole="RegistrationFacility" ToRole="Registration" />
+        </EntityType>
+        <EntityType Name="BillReport">
+          <Key>
+            <PropertyRef Name="BillNo" />
+          </Key>
+          <Property Name="BillNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RegistrationId" Type="Int32" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+          <Property Name="registrationFee" Type="Int32" />
+          <Property Name="c1" Type="Int32" />
+          <Property Name="c2" Type="Int32" />
+          <Property Name="c3" Type="Int32" />
+          <Property Name="c4" Type="Int32" />
+          <Property Name="c5" Type="Int32" />
+          <Property Name="c6" Type="Int32" />
+          <Property Name="c7" Type="Int32" />
+          <Property Name="c8" Type="Int32" />
+          <Property Name="c9" Type="Int32" />
+          <Property Name="c10" Type="Int32" />
+          <Property Name="CreatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="AddGroup" Type="Int32" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="c11" Type="Int32" />
+        </EntityType>
+        <EntityType Name="DiagnosticCancelationDetail">
+          <Key>
+            <PropertyRef Name="SrNo" />
+          </Key>
+          <Property Name="SrNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RegistrationID" Type="Int32" />
+          <Property Name="CancelReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CancelBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CancelDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <Association Name="FK_FacilityInvoiceDetail_FacilityInvoice">
+          <End Role="C_FacilityInvoice" Type="Self.C_FacilityInvoice" Multiplicity="1" />
+          <End Role="C_FacilityInvoiceDetail" Type="Self.C_FacilityInvoiceDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="C_FacilityInvoice">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="C_FacilityInvoiceDetail">
+              <PropertyRef Name="InvoiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FacilityInvoiceDetail_Facility">
+          <End Role="Facility" Type="Self.Facility" Multiplicity="1" />
+          <End Role="C_FacilityInvoiceDetail" Type="Self.C_FacilityInvoiceDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facility">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="C_FacilityInvoiceDetail">
+              <PropertyRef Name="FacilityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FacilityInvoiceDetail_Service">
+          <End Role="FacilityItem" Type="Self.FacilityItem" Multiplicity="1" />
+          <End Role="C_FacilityInvoiceDetail" Type="Self.C_FacilityInvoiceDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FacilityItem">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="C_FacilityInvoiceDetail">
+              <PropertyRef Name="ServiceId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BranchDoctor_Doctor">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="BranchDoctor" Type="Self.BranchDoctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BranchDoctor">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DoctorDegree_Degree">
+          <End Role="Degree" Type="Self.Degree" Multiplicity="1" />
+          <End Role="DoctorDegree" Type="Self.DoctorDegree" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Degree">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DoctorDegree">
+              <PropertyRef Name="DegreeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DoctorDegree_Doctor">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="DoctorDegree" Type="Self.DoctorDegree" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DoctorDegree">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DoctorSpecialization_Doctor">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="DoctorSpecialization" Type="Self.DoctorSpecialization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DoctorSpecialization">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RegistrationDoctor_Doctor">
+          <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
+          <End Role="RegistrationDoctor" Type="Self.RegistrationDoctor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Doctor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RegistrationDoctor">
+              <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Service_Facility">
+          <End Role="Facility" Type="Self.Facility" Multiplicity="1" />
+          <End Role="FacilityItem" Type="Self.FacilityItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facility">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="FacilityItem">
+              <PropertyRef Name="FacilityId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RegistrationDetail_Registration">
+          <End Role="Registration" Type="Self.Registration" Multiplicity="1" />
+          <End Role="RegistrationDetail" Type="Self.RegistrationDetail" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Registration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RegistrationDetail">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RegistrationFacility_Registration">
+          <End Role="Registration" Type="Self.Registration" Multiplicity="1" />
+          <End Role="RegistrationFacility" Type="Self.RegistrationFacility" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Registration">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="RegistrationFacility">
+              <PropertyRef Name="RegistrationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PoliclinicPatnaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="C_FacilityInvoice" EntityType="Self.C_FacilityInvoice" />
+          <EntitySet Name="C_FacilityInvoiceDetail" EntityType="Self.C_FacilityInvoiceDetail" />
+          <EntitySet Name="AdminUsers" EntityType="Self.AdminUser" />
+          <EntitySet Name="BranchDoctors" EntityType="Self.BranchDoctor" />
+          <EntitySet Name="Degrees" EntityType="Self.Degree" />
+          <EntitySet Name="Doctors" EntityType="Self.Doctor" />
+          <EntitySet Name="DoctorDegrees" EntityType="Self.DoctorDegree" />
+          <EntitySet Name="DoctorSpecializations" EntityType="Self.DoctorSpecialization" />
+          <EntitySet Name="employees" EntityType="Self.employee" />
+          <EntitySet Name="Facilities" EntityType="Self.Facility" />
+          <EntitySet Name="FacilityItems" EntityType="Self.FacilityItem" />
+          <EntitySet Name="Registrations" EntityType="Self.Registration" />
+          <EntitySet Name="RegistrationDetails" EntityType="Self.RegistrationDetail" />
+          <EntitySet Name="RegistrationDoctors" EntityType="Self.RegistrationDoctor" />
+          <EntitySet Name="RegistrationFacilities" EntityType="Self.RegistrationFacility" />
+          <EntitySet Name="BillReports" EntityType="Self.BillReport" />
+          <EntitySet Name="DiagnosticCancelationDetails" EntityType="Self.DiagnosticCancelationDetail" />
+          <AssociationSet Name="FK_FacilityInvoiceDetail_FacilityInvoice" Association="Self.FK_FacilityInvoiceDetail_FacilityInvoice">
+            <End Role="C_FacilityInvoice" EntitySet="C_FacilityInvoice" />
+            <End Role="C_FacilityInvoiceDetail" EntitySet="C_FacilityInvoiceDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FacilityInvoiceDetail_Facility" Association="Self.FK_FacilityInvoiceDetail_Facility">
+            <End Role="Facility" EntitySet="Facilities" />
+            <End Role="C_FacilityInvoiceDetail" EntitySet="C_FacilityInvoiceDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FacilityInvoiceDetail_Service" Association="Self.FK_FacilityInvoiceDetail_Service">
+            <End Role="FacilityItem" EntitySet="FacilityItems" />
+            <End Role="C_FacilityInvoiceDetail" EntitySet="C_FacilityInvoiceDetail" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BranchDoctor_Doctor" Association="Self.FK_BranchDoctor_Doctor">
+            <End Role="Doctor" EntitySet="Doctors" />
+            <End Role="BranchDoctor" EntitySet="BranchDoctors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DoctorDegree_Degree" Association="Self.FK_DoctorDegree_Degree">
+            <End Role="Degree" EntitySet="Degrees" />
+            <End Role="DoctorDegree" EntitySet="DoctorDegrees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DoctorDegree_Doctor" Association="Self.FK_DoctorDegree_Doctor">
+            <End Role="Doctor" EntitySet="Doctors" />
+            <End Role="DoctorDegree" EntitySet="DoctorDegrees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DoctorSpecialization_Doctor" Association="Self.FK_DoctorSpecialization_Doctor">
+            <End Role="Doctor" EntitySet="Doctors" />
+            <End Role="DoctorSpecialization" EntitySet="DoctorSpecializations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RegistrationDoctor_Doctor" Association="Self.FK_RegistrationDoctor_Doctor">
+            <End Role="Doctor" EntitySet="Doctors" />
+            <End Role="RegistrationDoctor" EntitySet="RegistrationDoctors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Service_Facility" Association="Self.FK_Service_Facility">
+            <End Role="Facility" EntitySet="Facilities" />
+            <End Role="FacilityItem" EntitySet="FacilityItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RegistrationDetail_Registration" Association="Self.FK_RegistrationDetail_Registration">
+            <End Role="Registration" EntitySet="Registrations" />
+            <End Role="RegistrationDetail" EntitySet="RegistrationDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RegistrationFacility_Registration" Association="Self.FK_RegistrationFacility_Registration">
+            <End Role="Registration" EntitySet="Registrations" />
+            <End Role="RegistrationFacility" EntitySet="RegistrationFacilities" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PoliclinicPatnaModelStoreContainer" CdmEntityContainer="PoliclinicPatnaEntities">
+          <EntitySetMapping Name="C_FacilityInvoice">
+            <EntityTypeMapping TypeName="PoliclinicPatnaModel.C_FacilityInvoice">
+              <MappingFragment StoreEntitySet="_FacilityInvoice">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+                <ScalarProperty Name="PatientId" ColumnName="PatientId" />
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+                <ScalarProperty Name="AppointmentDate" ColumnName="AppointmentDate" />
+                <ScalarProperty Name="PaymentMethod" ColumnName="PaymentMethod" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CancelReason" ColumnName="CancelReason" />
+                <ScalarProperty Name="CanceledBy" ColumnName="CanceledBy" />
+                <ScalarProperty Name="CancelDate" ColumnName="CancelDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="C_FacilityInvoiceDetail">
+            <EntityTypeMapping TypeName="PoliclinicPatnaModel.C_FacilityInvoiceDetail">
+              <MappingFragment StoreEntitySet="_FacilityInvoiceDetail">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="InvoiceId" ColumnName="InvoiceId" />
+                <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+                <ScalarProperty Name="ServiceId" ColumnName="ServiceId" />
+                <ScalarProperty Name="Fee" ColumnName="Fee" />
+                <ScalarProperty Name="ServiceCharge" ColumnName="ServiceCharge" />
+                <ScalarProperty Name="Tax" ColumnName="Tax" />
+                <ScalarProperty Name="TaxPercent" ColumnName="TaxPercent" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="DiscountType" ColumnName="DiscountType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdminUsers">
+            <EntityTypeMapping TypeName="PoliclinicPatnaModel.AdminUser">
+              <MappingFragment StoreEntitySet="AdminUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+                <ScalarProperty Name="LoginId" ColumnName="LoginId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BranchDoctors">
+            <EntityTypeMapping TypeName="PoliclinicPatnaModel.BranchDoctor">
+              <MappingFragment StoreEntitySet="BranchDoctor">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Degrees">
+            <EntityTypeMapping TypeName="PoliclinicPatnaModel.Degree">
+              <MappingFragment StoreEntitySet="Degree">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Doctors">
+            <EntityTypeMapping TypeName="PoliclinicPatnaModel.Doctor">
+              <MappingFragment StoreEntitySet="Doctor">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Fee" ColumnName="Fee" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="ImageId" ColumnName="ImageId" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="DOJ" ColumnName="DOJ" />
+                <ScalarProperty Name="Landline" ColumnName="Landline" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="DoctorVisitDay" ColumnName="DoctorVisitDay" />
+                <ScalarProperty Name="DoctorTiming" ColumnName="DoctorTiming" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DoctorDegrees">
+            <EntityTypeMapping TypeName="PoliclinicPatnaModel.DoctorDegree">
+              <MappingFragment StoreEntitySet="DoctorDegree">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="DegreeId" ColumnName="DegreeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DoctorSpecializations">
+            <EntityTypeMapping TypeName="PoliclinicPatnaModel.DoctorSpecialization">
+              <MappingFragment StoreEntitySet="DoctorSpecialization">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="SpecializationId" ColumnName="SpecializationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="employees">
+            <EntityTypeMapping TypeName="PoliclinicPatnaModel.employee">
+              <MappingFragment StoreEntitySet="employee">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="createdBy" ColumnName="createdBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Facilities">
+            <EntityTypeMapping TypeName="PoliclinicPatnaModel.Facility">
+              <MappingFragment StoreEntitySet="Facility">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="FileId" ColumnName="FileId" />
+                <ScalarProperty Name="UIVisible" ColumnName="UIVisible" />
+                <ScalarProperty Name="MutlipleVisitRequired" ColumnName="MutlipleVisitRequired" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FacilityItems">
+            <EntityTypeMapping TypeName="PoliclinicPatnaModel.FacilityItem">
+              <MappingFragment StoreEntitySet="FacilityItem">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FacilityId" ColumnName="FacilityId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="FileId" ColumnName="FileId" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="OfferAmount" ColumnName="OfferAmount" />
+                <ScalarProperty Name="VisitsRequired" ColumnName="VisitsRequired" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Registrations">
+            <EntityTypeMapping TypeName="PoliclinicPatnaModel.Registration">
+              <MappingFragment StoreEntitySet="Registration">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RegistrationDate" ColumnName="RegistrationDate" />
+                <ScalarProperty Name="RegNo" ColumnName="RegNo" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="PatientTypeId" ColumnName="PatientTypeId" />
+                <ScalarProperty Name="BranchId" ColumnName="BranchId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsSingleBilling" ColumnName="IsSingleBilling" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CanceledBy" ColumnName="CanceledBy" />
+                <ScalarProperty Name="CancelDate" ColumnName="CancelDate" />
+                <ScalarProperty Name="CancelReason" ColumnName="CancelReason" />
+                <ScalarProperty Name="RegCount" ColumnName="RegCount" />
+                <ScalarProperty Name="RecommendedBy" ColumnName="RecommendedBy" />
+                <ScalarProperty Name="RName" ColumnName="RName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RegistrationDetails">
+            <EntityTypeMapping TypeName="PoliclinicPatnaModel.RegistrationDetail">
+              <MappingFragment StoreEntitySet="RegistrationDetail">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+                <ScalarProperty Name="RegistrationFee" ColumnName="RegistrationFee" />
+                <ScalarProperty Name="ServiceCharges" ColumnName="ServiceCharges" />
+                <ScalarProperty Name="Tax" ColumnName="Tax" />
+                <ScalarProperty Name="TaxPercent" ColumnName="TaxPercent" />
+                <ScalarProperty Name="DiscountAmount" ColumnName="DiscountAmount" />
+                <ScalarProperty Name="DiscountType" ColumnName="DiscountType" />
+                <ScalarProperty Name="PaymentMethod" ColumnName="PaymentMethod" />
+                <ScalarProperty Name="PaymentTransactionId" ColumnName="PaymentTransactionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RegistrationDoctors">
+            <EntityTypeMapping TypeName="PoliclinicPatnaModel.RegistrationDoctor">
+              <MappingFragment StoreEntitySet="RegistrationDoctor">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="RegistrationId" ColumnName="RegistrationId" />
+                <ScalarProperty Name="AppointmentDate" ColumnName="AppointmentDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsPrimary" ColumnName="IsPrimary" />
+                <ScalarProperty Name="Specialization" ColumnName="Specialization" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RegistrationFacilities">
+            <EntityTypeMapping TypeName="PoliclinicPatnaModel.RegistrationFacility">
+              <MappingFragment StoreEntitySet="RegistrationFacility">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="RegistrationId" ColumnName="RegistrationId" />
+                <ScalarProperty Name="TransactionId" ColumnName="TransactionId" />
+                <ScalarProperty Name="AppointmentDate" ColumnName="AppointmentDate" />
+                <ScalarProperty Name="PaymentMethod" ColumnName="PaymentMethod" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CancelReason" ColumnName="CancelReason" />
+                <ScalarProperty Name="CanceledBy" ColumnName="CanceledBy" />
+                <ScalarProperty Name="CancelDate" ColumnName="CancelDate" />
+                <ScalarProperty Name="IsMultipleVisit" ColumnName="IsMultipleVisit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BillReports">
+            <EntityTypeMapping TypeName="PoliclinicPatnaModel.BillReport">
+              <MappingFragment StoreEntitySet="BillReport">
+                <ScalarProperty Name="BillNo" ColumnName="BillNo" />
+                <ScalarProperty Name="RegistrationId" ColumnName="RegistrationId" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="registrationFee" ColumnName="registrationFee" />
+                <ScalarProperty Name="c1" ColumnName="c1" />
+                <ScalarProperty Name="c2" ColumnName="c2" />
+                <ScalarProperty Name="c3" ColumnName="c3" />
+                <ScalarProperty Name="c4" ColumnName="c4" />
+                <ScalarProperty Name="c5" ColumnName="c5" />
+                <ScalarProperty Name="c6" ColumnName="c6" />
+                <ScalarProperty Name="c7" ColumnName="c7" />
+                <ScalarProperty Name="c8" ColumnName="c8" />
+                <ScalarProperty Name="c9" ColumnName="c9" />
+                <ScalarProperty Name="c10" ColumnName="c10" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="AddGroup" ColumnName="AddGroup" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="c11" ColumnName="c11" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DiagnosticCancelationDetails">
+            <EntityTypeMapping TypeName="PoliclinicPatnaModel.DiagnosticCancelationDetail">
+              <MappingFragment StoreEntitySet="DiagnosticCancelationDetail">
+                <ScalarProperty Name="SrNo" ColumnName="SrNo" />
+                <ScalarProperty Name="RegistrationID" ColumnName="RegistrationID" />
+                <ScalarProperty Name="CancelReason" ColumnName="CancelReason" />
+                <ScalarProperty Name="CancelBy" ColumnName="CancelBy" />
+                <ScalarProperty Name="CancelDate" ColumnName="CancelDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

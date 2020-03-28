@@ -1,0 +1,52 @@
+﻿
+@*<table id="example"  width="100%"></table>*@
+
+<table id="example" class="display">
+		<thead>
+			<tr>
+				<th>Doctor Name</th>
+				<th>Mobile</th>
+				<th>Gender</th>
+				<th>Fee</th>
+
+
+			</tr>
+		</thead>
+		<tfoot>
+			<tr>
+				<th>Doctor Name</th>
+				<th>Mobile</th>
+				<th>Gender</th>
+				<th>Fee</th>
+
+			</tr>
+		</tfoot>
+	</table>
+
+@section scripts{
+
+	<script>
+
+
+	 
+
+		
+	
+
+		$(document).ready(function () {
+			$('#example').DataTable({
+				"ajax": "https://localhost:44303/api/values/Get",
+				"columns": [
+					{ "data": "Title" },
+					{ "data": "Mobile" },
+					{ "data": "Gender" },
+					{ "data": "Fee" }
+				   
+				]
+			});
+		});
+
+	</script>
+
+
+}

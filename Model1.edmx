@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="PoliclinicPatnaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="PoliclinicPatnaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="_FacilityInvoice">
           <Key>
             <PropertyRef Name="Id" />
@@ -244,6 +244,16 @@ warning 6002: The table/view 'PoliclinicPatna.dbo.DiagnosticCancelationDetail' d
           <Property Name="CancelDate" Type="datetime" />
           <Property Name="IsMultipleVisit" Type="bit" Nullable="false" />
         </EntityType>
+        <EntityType Name="Specialization">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsSingleBilling" Type="bit" Nullable="false" />
+        </EntityType>
         <Association Name="FK_BranchDoctor_Doctor">
           <End Role="Doctor" Type="Self.Doctor" Multiplicity="1" />
           <End Role="BranchDoctor" Type="Self.BranchDoctor" Multiplicity="*" />
@@ -289,6 +299,18 @@ warning 6002: The table/view 'PoliclinicPatna.dbo.DiagnosticCancelationDetail' d
             </Principal>
             <Dependent Role="DoctorSpecialization">
               <PropertyRef Name="DoctorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DoctorSpecialization_Specialization">
+          <End Role="Specialization" Type="Self.Specialization" Multiplicity="1" />
+          <End Role="DoctorSpecialization" Type="Self.DoctorSpecialization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specialization">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DoctorSpecialization">
+              <PropertyRef Name="SpecializationId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -392,6 +414,7 @@ warning 6002: The table/view 'PoliclinicPatna.dbo.DiagnosticCancelationDetail' d
           <EntitySet Name="RegistrationDetail" EntityType="Self.RegistrationDetail" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RegistrationDoctor" EntityType="Self.RegistrationDoctor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="RegistrationFacility" EntityType="Self.RegistrationFacility" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Specialization" EntityType="Self.Specialization" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BillReport" EntityType="Self.BillReport" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
 [BillReport].[BillNo] AS [BillNo], 
@@ -439,6 +462,10 @@ FROM [dbo].[DiagnosticCancelationDetail] AS [DiagnosticCancelationDetail]</Defin
             <End Role="Doctor" EntitySet="Doctor" />
             <End Role="DoctorSpecialization" EntitySet="DoctorSpecialization" />
           </AssociationSet>
+          <AssociationSet Name="FK_DoctorSpecialization_Specialization" Association="Self.FK_DoctorSpecialization_Specialization">
+            <End Role="Specialization" EntitySet="Specialization" />
+            <End Role="DoctorSpecialization" EntitySet="DoctorSpecialization" />
+          </AssociationSet>
           <AssociationSet Name="FK_FacilityInvoiceDetail_Facility" Association="Self.FK_FacilityInvoiceDetail_Facility">
             <End Role="Facility" EntitySet="Facility" />
             <End Role="_FacilityInvoiceDetail" EntitySet="_FacilityInvoiceDetail" />
@@ -468,8 +495,7 @@ FROM [dbo].[DiagnosticCancelationDetail] AS [DiagnosticCancelationDetail]</Defin
             <End Role="FacilityItem" EntitySet="FacilityItem" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="PoliclinicPatnaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -581,6 +607,7 @@ FROM [dbo].[DiagnosticCancelationDetail] AS [DiagnosticCancelationDetail]</Defin
           <Property Name="DoctorId" Type="Int32" Nullable="false" />
           <Property Name="SpecializationId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Doctor" Relationship="Self.FK_DoctorSpecialization_Doctor" FromRole="DoctorSpecialization" ToRole="Doctor" />
+          <NavigationProperty Name="Specialization" Relationship="PoliclinicPatnaModel.FK_DoctorSpecialization_Specialization" FromRole="DoctorSpecialization" ToRole="Specialization" />
         </EntityType>
         <EntityType Name="employee">
           <Key>
@@ -924,7 +951,35 @@ FROM [dbo].[DiagnosticCancelationDetail] AS [DiagnosticCancelationDetail]</Defin
             <End Role="Registration" EntitySet="Registrations" />
             <End Role="RegistrationFacility" EntitySet="RegistrationFacilities" />
           </AssociationSet>
+          <EntitySet Name="Specializations" EntityType="PoliclinicPatnaModel.Specialization" />
+          <AssociationSet Name="FK_DoctorSpecialization_Specialization" Association="PoliclinicPatnaModel.FK_DoctorSpecialization_Specialization">
+            <End Role="Specialization" EntitySet="Specializations" />
+            <End Role="DoctorSpecialization" EntitySet="DoctorSpecializations" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Specialization">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsSingleBilling" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="DoctorSpecializations" Relationship="PoliclinicPatnaModel.FK_DoctorSpecialization_Specialization" FromRole="Specialization" ToRole="DoctorSpecialization" />
+        </EntityType>
+        <Association Name="FK_DoctorSpecialization_Specialization">
+          <End Type="PoliclinicPatnaModel.Specialization" Role="Specialization" Multiplicity="1" />
+          <End Type="PoliclinicPatnaModel.DoctorSpecialization" Role="DoctorSpecialization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specialization">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DoctorSpecialization">
+              <PropertyRef Name="SpecializationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1180,6 +1235,17 @@ FROM [dbo].[DiagnosticCancelationDetail] AS [DiagnosticCancelationDetail]</Defin
                 <ScalarProperty Name="CancelReason" ColumnName="CancelReason" />
                 <ScalarProperty Name="CancelBy" ColumnName="CancelBy" />
                 <ScalarProperty Name="CancelDate" ColumnName="CancelDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Specializations">
+            <EntityTypeMapping TypeName="PoliclinicPatnaModel.Specialization">
+              <MappingFragment StoreEntitySet="Specialization">
+                <ScalarProperty Name="IsSingleBilling" ColumnName="IsSingleBilling" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

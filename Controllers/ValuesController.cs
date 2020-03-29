@@ -27,16 +27,22 @@ namespace ApiExample.Controllers
 
         }
 
-        // GET api/values/5
-        //[Route("api/adarsh/{id}")]
-        //public string Get()
+      
+        [Route("api/adarsh/{id}")]
+        //public HttpResponseMessage GetDoctorbranch()
         //{
-        //    return "value";
+        //    //return Request.CreateResponse(HttpStatusCode.OK,web..Select(x=> new {x. }));
         //}
 
         // POST api/values
-        public void Post([FromBody]string value)
+
+        [HttpPost]
+        public HttpResponseMessage Post(Doctor value)
         {
+
+
+            return Request.CreateResponse(HttpStatusCode.OK,value);
+
         }
 
         // PUT api/values/5

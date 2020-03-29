@@ -33,6 +33,8 @@
         <AssociationConnector Association="PoliclinicPatnaModel.FK_Service_Facility" ManuallyRouted="false" />
         <AssociationConnector Association="PoliclinicPatnaModel.FK_RegistrationDetail_Registration" ManuallyRouted="false" />
         <AssociationConnector Association="PoliclinicPatnaModel.FK_RegistrationFacility_Registration" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="PoliclinicPatnaModel.Specialization" Width="1.5" PointX="13.375" PointY="0.875" />
+        <AssociationConnector Association="PoliclinicPatnaModel.FK_DoctorSpecialization_Specialization" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

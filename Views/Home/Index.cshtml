@@ -21,11 +21,12 @@
                             <div id="errFirst"></div>
                         </div>
 
-                        @*<div class="form-group">
-                            <label for="lastname"><span class="req">* </span> Last name: </label>
-                            <input class="form-control" type="text" name="lastname" id="txt" onkeyup="Validate(this)" placeholder="hyphen or single quote OK" required />
-                            <div id="errLast"></div>
-                        </div>*@
+                        <div class="form-group">
+                            <label for="DoctorSpecializations"><span class="req">* </span> Specialization: </label>
+                            <select id="DoctorSpecializations" name="DoctorSpecializations" class="form-control">
+                              </select>
+                            @*<div id="errLast"></div>*@
+                        </div>
 
                         <div class="form-group">
                             <label for="email"><span class="req">* </span> Decsription </label>
@@ -97,13 +98,29 @@
     <script src="~/Scripts/custom.js"></script>
 	<script>
 
+        $(document).ready(function () {
 
-	 
 
-		
-	
+          
 
-		$(document).ready(function () {
+            //$.ajax({
+            //    type: "GET",
+            //    url: "/api/values/GetDoctorbranch",
+            //    dataType: "json",
+            //    success: function (data)
+            //    {
+                  
+            //        //$.each(data.aaData, function (i, data)
+            //        //{
+
+            //        //    console.log(data);
+            //        //    alert(data.Id + ":" + data.Title);
+            //        //    var div_data = "<option value=" + data.Id + ">" + data.Title + "</option>";
+            //        //    alert(div_data);
+            //        //    $(div_data).appendTo('#DoctorSpecializations');
+            //        //});
+            //    }
+            //});
 			$('#example').DataTable({
 				"ajax": "https://localhost:44303/api/values/Get",
 				"columns": [
@@ -115,6 +132,14 @@
 				]
             });
 
+            var options = $("#DoctorSpecializations");
+            options.append($("<option />").val("0").text("Select Specialization"));
+            $.getJSON("/api/values/GetDoctorbranch", function (response) {
+                $.each(response, function () {
+                    //alert("");
+                    options.append($("<option />").val(this.Id).text(this.Title));
+                });
+            });
             $("#btnSubmit").click(function () {
 
                 var value = $("#fileForm").serialize();

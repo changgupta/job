@@ -28,7 +28,7 @@ namespace ApiExample.Controllers
         }
 
 
-        [Route("api/adarsh/{id}")]
+        //[Route("api/adarsh/{id}")]
         public HttpResponseMessage GetDoctorbranch()
         {
             return Request.CreateResponse(HttpStatusCode.OK, web.Specializations.Select(x => new { x.Title,x.Id }));

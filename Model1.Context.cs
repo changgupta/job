@@ -42,5 +42,6 @@ namespace ApiExample
         public DbSet<RegistrationFacility> RegistrationFacilities { get; set; }
         public DbSet<BillReport> BillReports { get; set; }
         public DbSet<DiagnosticCancelationDetail> DiagnosticCancelationDetails { get; set; }
+        public DbSet<Specialization> Specializations { get; set; }
     }
 }

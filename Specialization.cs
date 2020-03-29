@@ -12,13 +12,19 @@ namespace ApiExample
     using System;
     using System.Collections.Generic;
     
-    public partial class DoctorSpecialization
+    public partial class Specialization
     {
-        public int Id { get; set; }
-        public int DoctorId { get; set; }
-        public int SpecializationId { get; set; }
+        public Specialization()
+        {
+            this.DoctorSpecializations = new HashSet<DoctorSpecialization>();
+        }
     
-        public virtual Doctor Doctor { get; set; }
-        public virtual Specialization Specialization { get; set; }
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+        public bool IsActive { get; set; }
+        public bool IsSingleBilling { get; set; }
+    
+        public virtual ICollection<DoctorSpecialization> DoctorSpecializations { get; set; }
     }
 }

@@ -19,9 +19,10 @@ namespace ApiExample.Controllers
 
             var result = new
             {
-               
-                data = web.Doctors.Select(x => new { x.Title, x.Mobile, x.Gender, x.Fee })
+
+                data = web.Doctors.Select(x => new { x.Id, x.Title, x.Mobile, x.Gender, x.Fee }).OrderByDescending(x => x.Id)
             };
+           
             return Request.CreateResponse(HttpStatusCode.OK,result);
 
 
@@ -39,8 +40,9 @@ namespace ApiExample.Controllers
         [HttpPost]
         public HttpResponseMessage Post(Doctor value)
         {
-
-
+            
+            web.Doctors.Add(value);
+            web.SaveChanges();
             return Request.CreateResponse(HttpStatusCode.OK,value);
 
         }

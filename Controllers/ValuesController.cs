@@ -23,6 +23,8 @@ namespace ApiExample.Controllers
                 data = web.Doctors.Select(x => new { x.Title, x.Mobile, x.Gender, x.Fee })
             };
             return Request.CreateResponse(HttpStatusCode.OK,result);
+
+
         }
 
         // GET api/values/5

@@ -1,4 +1,131 @@
-﻿function checkPass() {
+﻿
+$(document).ready(function () {
+
+
+    loadDoctors();
+
+
+    //var table = $('#example').DataTable({
+    //    "processing": true,
+    //    "serverSide": true,
+    //    "order": [],
+    //    "ajax": "/api/values/Get",
+    //    "type": "get",
+    //    "columns":
+    //        [
+
+    //            { "data": "Title" },
+    //            { "data": "Mobile" },
+    //            { "data": "Gender" },
+    //            { "data": "Fee" },
+    //            {
+    //                //"data": "Id",
+    //                className: "center",
+    //                defaultContent: '<a href="#" onclick="editfn(Id)" class="editor_edit">Edit</a> / <a href="#" class="editor_remove" onclick="Remove(Id)">Delete</a>'
+    //            }
+
+    //        ],
+
+
+
+    //});
+    LoadSpecializations();
+
+
+
+
+
+    $("#btnSubmit").click(function () {
+
+        var value = $("#fileForm").serialize();
+        $.ajax({
+            url: "https://localhost:44303/api/values/delete/77",
+            type: 'get',
+            cache: false,
+            data: value,
+            success: function (response) {
+                //table.on('xhr', function () {
+                //    var json = table.ajax.json();
+
+                //    alert(json.data.length + ' row(s) were loaded');
+                //});
+
+                loadDoctors();
+
+            }
+        });
+    });
+});
+
+function CallMe(data) {
+    alert(data);
+
+    $.ajax({
+        url: "/api/values/Delete/" + data,
+        type: 'get',
+        dataType: "json",
+        contentType: "application/json",
+        success: function (response) {
+
+            alert(response);
+
+            loadDoctors();
+
+        }
+    });
+}
+
+function loadDoctors() {
+    $.ajax({
+        type: "get",
+        url: "/api/values/Get",
+        dataType: "json",
+        contentType: "application/json",
+        success: function (response) {
+
+            console.log(response);
+            $.each(response.data, function (index, value) {
+                //console.log(response);
+
+                //alert(value.Title );
+                var tr = "<tr>";
+                tr += "<td>" + value.Title + "</td>";
+                tr += "<td>" + value.Mobile + "</td>";
+                tr += "<td>" + value.Gender + "</td>";
+                tr += "<td>" + value.Fee + "</td>";
+                tr += "<td>" + "<input type='button' id='" + value.Id + "' onclick='CallMe(" + value.Id + ")' value='Delete'>" + "</td>" + "</tr>";
+                $("#tBody").append(tr);
+            });
+            $('#example').DataTable({
+                "dom": '<"toolbar">frtip'
+            });
+
+            $("div.toolbar").html('<b>Custom tool bar! Text/images etc.</b>');
+        }
+    });
+
+}
+
+function LoadSpecializations() {
+    var options = $("#DoctorSpecializa");
+    options.append($("<option />").val("0").text("Select Specialization"));
+    $.getJSON("/api/values/GetDoctorbranch", function (response) {
+        $.each(response, function () {
+            //alert("");
+            options.append($("<option />").val(this.Id).text(this.Title));
+        });
+    });
+}
+
+function editfn(id) {
+    alert(id);
+
+
+}
+
+
+
+function checkPass() {
     //Store the password field objects into variables ...
     var pass1 = document.getElementById('pass1');
     var pass2 = document.getElementById('pass2');

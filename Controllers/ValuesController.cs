@@ -40,10 +40,18 @@ namespace ApiExample.Controllers
         [HttpPost]
         public HttpResponseMessage Post(Doctor value)
         {
-            
-            web.Doctors.Add(value);
-            web.SaveChanges();
-            return Request.CreateResponse(HttpStatusCode.OK,value);
+
+            try
+            {
+                web.Doctors.Add(value);
+                web.SaveChanges();
+                return Request.CreateResponse(HttpStatusCode.OK, "Added Successfully");
+            }
+            catch (Exception)
+            {
+
+                return Request.CreateResponse(HttpStatusCode.BadRequest, "Internal Server Error");
+            }
 
         }
 
@@ -53,8 +61,43 @@ namespace ApiExample.Controllers
         }
 
         // DELETE api/values/5
-        public void Delete(int id)
+        [HttpGet]
+        public HttpResponseMessage Delete(int id)
         {
+            Doctor obj = web.Doctors.Where(x => x.Id == id).FirstOrDefault();
+            if (obj != null)
+            {
+                web.Doctors.Remove(obj);
+                web.SaveChanges();
+
+                return Request.CreateResponse(HttpStatusCode.OK,"Delete Successfully");
+            }
+
+            else 
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+            }
+
+           
+        }
+
+
+
+        [HttpGet]
+        public HttpResponseMessage Edit(int id)
+        {
+            Doctor obj = web.Doctors.Where(x => x.Id == id).FirstOrDefault();
+            if (obj != null)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, obj);
+            }
+
+            else
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound);
+            }
+
+
         }
     }
 }
